@@ -1,0 +1,28 @@
+.Header
+    padding: 2rem 1rem 2rem
+    flexCenter(column)
+    
+    .solar
+        text-transform: uppercase
+        font-size: 1.4rem
+        font-weight: bold
+        color: $Orange
+        text-align: center
+
+    nav
+        flexCenter(row)        
+        margin: 2rem .5rem 0
+        flex-wrap: wrap
+        
+        >li
+            background-color: $Blue
+            color: white
+            padding: .5rem
+            margin: .5rem
+            width: 7rem
+            text-align: center
+            cursor: pointer
+            &:hover
+                background-color: lighten($Blue, 10%)
+            &.selected
+                background-color: $Orange

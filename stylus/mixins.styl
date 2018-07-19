@@ -1,0 +1,29 @@
+placeholder()
+    &::-webkit-input-placeholder
+        {block}
+    &:-moz-placeholder
+        {block}
+    &::-moz-placeholder
+        {block}
+    &:-ms-input-placeholder
+        {block}
+        
+hoverSwap( $color, $bg-color )
+    color: $color
+    background-color: $bg-color
+    
+    &:hover
+        color: $bg-color
+        background-color: $color
+
+fontFace( $family, $weight, $src )
+    font-display: swap;
+    font-family: $family;
+    font-weight: $weight;
+    src: url($src) format('truetype');
+    
+flexCenter( $direction )
+    display: flex
+    flex-direction: $direction
+    justify-content: center
+    align-items: center

@@ -1,0 +1,50 @@
+{
+  "description": "Asidaco solar products and services",
+  "engines": {
+    "node": "9.2.1"
+  },
+  "dependencies": {
+    "bcrypt": "2.0.0",
+    "dotenv": "5.0.1",
+    "email": "^0.2.6",
+    "googleapis": "28.1.0",
+    "jws": "^3.1.5",
+    "mongodb": "^2.2.35"
+  },
+  "devDependencies": {
+    "@futuredays/toast": "^1.0.3",
+    "@futuredays/view": "^1.0.12",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babelify": "8.0.0",
+    "browserify": "14.5.0",
+    "chai": "^4.1.2",
+    "envify": "^4.1.0",
+    "livereload": "git://github.com/cbaron/node-livereload.git#master",
+    "mocha": "^4.1.0",
+    "smoothscroll-polyfill": "^0.4.3",
+    "stylus": "0.54.5",
+    "uglify-js": "3.2.1",
+    "watch": "1.0.2"
+  },
+  "license": "MIT",
+  "name": "AsidacoSolar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FutureDaysSoftware/AsidacoSolar.git"
+  },
+  "scripts": {
+    "build:css": "stylus stylus/main.styl -o static/main.css && cat static/typeahead.css static/main.css > /tmp/bundle && mv /tmp/bundle static/main.css && gzip -c static/main.css > static/main.css.gz",
+    "build:js": "scripts/writeAssetMaps.js && browserify client/js/main.js -t [ babelify --presets [ env stage-2 ] ] -t [ envify --NODE_ENV PRODUCTION ]  | uglifyjs > static/debug/bundle.js && gzip -c static/debug/bundle.js > static/bundle.js.gz",
+    "build:js-debug": "scripts/writeAssetMaps.js && browserify client/js/main.js -o static/debug/debug.js -d -t [ babelify --presets [ env stage-2 ] --ignore [ /node_modules/ ] ] -t [ envify --NODE_ENV DEVELOPMENT ] && gzip -c static/debug/debug.js > static/debug/debug.js.gz",
+    "build:js-staging": "scripts/writeAssetMaps.js && browserify client/js/main.js -o static/debug/staging.js -d -t [ babelify --presets [ env stage-2 ] --ignore [ /node_modules/ ] ] -t [ envify --NODE_ENV STAGING ] && gzip -c static/debug/staging.js > static/debug/staging.js.gz",
+    "build:watch": "npm run watch:css & npm run watch:js & npm run livereload",
+    "livereload": "scripts/liveReload.js",
+    "test": "mocha --timeout 5000",
+    "watch:css": "watch 'npm run build:css' stylus --ignoreDotFiles --interval=0.5",
+    "watch:js": "watch 'npm run build:js-debug' client/js --ignoreDotFiles --interval=0.5"
+  },
+  "version": "0.0.1"
+}
